@@ -1,0 +1,69 @@
+{
+  "trips": [
+    {
+      "id": "1",
+      "destination": "Venice, Italy",
+      "countryCode": "IT",
+      "startDate": "2027-05-10",
+      "endDate": "2027-05-15",
+      "status": "planned",
+      "budgetLimit": 1500,
+      "userCurrency": "EUR",
+      "localCurrency": "EUR",
+      "imageUrl": "https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?auto=format&fit=crop&w=800",
+      "isFavorite": true
+    },
+    {
+      "id": "2",
+      "destination": "Ouidah, Benin",
+      "countryCode": "BJ",
+      "startDate": "2024-01-15",
+      "endDate": "2024-01-20",
+      "status": "done",
+      "budgetLimit": 800,
+      "userCurrency": "EUR",
+      "localCurrency": "XOF",
+      "imageUrl": "https://images.unsplash.com/photo-1591122940263-8820f719b02a?auto=format&fit=crop&w=800",
+      "isFavorite": false
+    },
+    {
+      "id": "3",
+      "destination": "Tokyo, Japan",
+      "countryCode": "JP",
+      "startDate": "2028-10-01",
+      "endDate": "2028-10-10",
+      "status": "planned",
+      "budgetLimit": 3000,
+      "userCurrency": "EUR",
+      "localCurrency": "JPY",
+      "imageUrl": "https://images.unsplash.com/photo-1540959733332-e94e270b4d82?auto=format&fit=crop&w=800",
+      "isFavorite": false
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2",
+      "tripId": "1",
+      "dayNumber": 1,
+      "time": "13:00",
+      "title": "Trattoria Lunch",
+      "category": "food",
+      "priceLocal": 35,
+      "priceUser": 35,
+      "isCompleted": false,
+      "notes": "Booked for 2 people"
+    },
+    {
+      "id": "a3",
+      "tripId": "2",
+      "dayNumber": 1,
+      "time": "09:00",
+      "title": "History Museum",
+      "category": "culture",
+      "priceLocal": 5000,
+      "priceUser": 7.6,
+      "isCompleted": true,
+      "notes": "Guided tour included"
+    }
+  ]
+}
