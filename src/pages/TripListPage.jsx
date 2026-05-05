@@ -31,7 +31,7 @@ function TripListPage() {
     return (
       <div className="text-center mt-5">
         <div className="spinner-border text-dark" role="status" />
-        <p className="mt-3 text-muted">Chargement de vos voyages...</p>
+        <p className="mt-3 text-muted">Loading...</p>
       </div>
     );
   }
@@ -40,9 +40,9 @@ function TripListPage() {
     <div className="TripListPage py-4">
       {/* HEADER */}
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold mb-0">Mes Voyages</h2>
+        <h2 className="fw-bold mb-0">My trips</h2>
         <Link to="/trips/create" className="btn btn-dark btn-sm px-3">
-          + Nouveau voyage
+          + New Trip
         </Link>
       </div>
 
@@ -60,9 +60,9 @@ function TripListPage() {
       {/* EMPTY STATE */}
       {filteredTrips.length === 0 ? (
         <div className="text-center py-5">
-          <p className="text-muted fs-5">Aucun voyage trouvé.</p>
+          <p className="text-muted fs-5">No trip found.</p>
           <Link to="/trips/create" className="btn btn-outline-dark mt-2">
-            Créer mon premier voyage
+           Create my first Trip
           </Link>
         </div>
       ) : (

@@ -7,7 +7,7 @@ function Navbar() {
         <Link to="/" className="navbar-brand fw-bold">
           Trip<span className="text-primary">Dot</span>
         </Link>
-        <Link to="/trips" className="btn btn-outline-light btn-sm">Mes Voyages</Link>
+        <Link to="/trips" className="btn btn-outline-light btn-sm">My Trips</Link>
       </div>
     </nav>
   );

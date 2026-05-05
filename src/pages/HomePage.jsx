@@ -25,19 +25,19 @@ function HomePage() {
         <h1 className="display-5 fw-bold">
           Trip<span className="text-primary">Dot</span>
         </h1>
-        <p className="lead text-secondary">Planifiez avec précision. Voyagez l'esprit léger.</p>
+        <p className="lead text-secondary">Plan your next trip with precision.</p>
         <Link to="/trips" className="btn btn-primary btn-lg mt-2 me-2">
-          Mes voyages
+         My trips
         </Link>
         <Link to="/trips/create" className="btn btn-outline-light btn-lg mt-2">
-          + Nouveau voyage
+          + New trip
         </Link>
       </div>
 
       {/* VOYAGES RÉCENTS */}
       {recentTrips.length > 0 && (
         <>
-          <h4 className="fw-bold mb-3">Voyages récents</h4>
+          <h4 className="fw-bold mb-3">Last Trip</h4>
           <div className="list-group mb-4">
             {recentTrips.map((trip) => (
               <Link
@@ -62,7 +62,7 @@ function HomePage() {
           </div>
           <div className="text-center">
             <Link to="/trips" className="btn btn-outline-dark btn-sm">
-              Voir tous mes voyages →
+            All trips →
             </Link>
           </div>
         </>

@@ -3,15 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 function TripDetailsPage() {
-  // Récupération de l'ID depuis l'URL (ex: /trips/1)
+ 
   const { tripId } = useParams();
 
   const [trip, setTrip] = useState(null);
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  // Utilisation de l'URL du serveur définie dans ton .env.local
+ 
   const API_URL = import.meta.env.VITE_SERVER_URL;
 
   useEffect(() => {
@@ -19,8 +18,7 @@ function TripDetailsPage() {
       try {
         setLoading(true);
         
-        // Appels simultanés pour le voyage et ses activités liées[cite: 3]
-        // On utilise tripId (String) en accord avec ton db.json
+   
         const [tripRes, activitiesRes] = await Promise.all([
           axios.get(`${API_URL}/trips/${tripId}`),
           axios.get(`${API_URL}/activities?tripId=${tripId}`)
@@ -42,13 +40,13 @@ function TripDetailsPage() {
     }
   }, [tripId, API_URL]);
 
-  if (loading) return <p className="text-center mt-5">Chargement de TripDot...</p>;
+  if (loading) return <p className="text-center mt-5">Loading TripDot...</p>;
 
   if (error || !trip) {
     return (
       <div className="text-center mt-5">
-        <h3 className="text-danger">Oups ! Voyage introuvable.</h3>
-        <Link to="/trips" className="btn btn-dark mt-3">Retour à la liste</Link>
+        <h3 className="text-danger">Oups ! no Trip found.</h3>
+        <Link to="/trips" className="btn btn-dark mt-3">comeback to the list</Link>
       </div>
     );
   }
@@ -89,8 +87,8 @@ function TripDetailsPage() {
 
       {/* SECTION ACTIVITÉS */}
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h3 className="fw-bold">Activités du voyage</h3>
-        <button className="btn btn-outline-dark btn-sm">+ Ajouter</button>
+        <h3 className="fw-bold">Activities</h3>
+        <button className="btn btn-outline-dark btn-sm">+ Add</button>
       </div>
 
       {activities.length === 0 ? (
@@ -117,7 +115,7 @@ function TripDetailsPage() {
                       to={`/activities/edit/${activity.id}`}
                       className="btn btn-sm btn-light border"
                     >
-                      Modifier
+                      Modify
                     </Link>
                   </div>
                 </div>
@@ -133,7 +131,7 @@ function TripDetailsPage() {
           ← Retour
         </Link>
         <Link to={`/trips/edit/${trip.id}`} className="btn btn-outline-secondary ms-auto">
-          Paramètres du voyage
+         Trip Parameters
         </Link>
       </div>
     </div>

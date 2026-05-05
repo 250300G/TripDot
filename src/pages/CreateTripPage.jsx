@@ -4,7 +4,7 @@ import axios from "axios";
 
 function CreateTripPage() {
   const navigate = useNavigate();
-  const API_URL = import.meta.env.VITE_SERVER_URL;
+
 
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -32,7 +32,7 @@ function CreateTripPage() {
       isFavorite,
       status: "planned",
     };
-
+  // call the API here to create one TRIP...????? SAISIE
     try {
       const response = await axios.post(`${API_URL}/trips`, newTrip);
       navigate(`/trips/${response.data.id}`);
