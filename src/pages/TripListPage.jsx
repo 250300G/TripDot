@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import TripCard from "../components/TripCard"; // ✅ bon import
+import TripCard from "../components/TripCard"; 
 
 function TripListPage() {
   const [allTrips, setAllTrips] = useState(null);
@@ -13,7 +13,7 @@ function TripListPage() {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/trips`); // ✅ /trips
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/trips`); // 
       setAllTrips(response.data);
     } catch (error) {
       console.log(error);
