@@ -1,19 +1,6 @@
 {
   "trips": [
     {
-      "id": "4",
-      "destination": "Paris, France",
-      "countryCode": "FR",
-      "startDate": "2027-05-18",
-      "endDate": "2027-05-20",
-      "status": "planned",
-      "budgetLimit": 500,
-      "userCurrency": "EUR",
-      "localCurrency": "EUR",
-      "imageUrl": "https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?auto=format&fit=crop&w=800",
-       "isFavorite": true
-    },
-    {
       "id": "1",
       "destination": "Venice, Italy",
       "countryCode": "IT",
@@ -24,7 +11,8 @@
       "userCurrency": "EUR",
       "localCurrency": "EUR",
       "imageUrl": "https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?auto=format&fit=crop&w=800",
-      "isFavorite": true
+      "isFavorite": true,
+      "currentWeather": "22°C, Sunny"
     },
     {
       "id": "2",
@@ -37,7 +25,8 @@
       "userCurrency": "EUR",
       "localCurrency": "XOF",
       "imageUrl": "https://images.unsplash.com/photo-1591122940263-8820f719b02a?auto=format&fit=crop&w=800",
-      "isFavorite": false
+      "isFavorite": false,
+      "currentWeather": "31°C, Humidity"
     },
     {
       "id": "3",
@@ -50,7 +39,74 @@
       "userCurrency": "EUR",
       "localCurrency": "JPY",
       "imageUrl": "https://images.unsplash.com/photo-1540959733332-e94e270b4d82?auto=format&fit=crop&w=800",
-      "isFavorite": false
+      "isFavorite": false,
+      "currentWeather": "19°C, Clear"
+    },
+    {
+      "id": "4",
+      "destination": "Paris, France",
+      "countryCode": "FR",
+      "startDate": "2027-05-18",
+      "endDate": "2027-05-20",
+      "status": "planned",
+      "budgetLimit": 500,
+      "userCurrency": "EUR",
+      "localCurrency": "EUR",
+      "imageUrl": "https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?auto=format&fit=crop&w=800",
+      "isFavorite": true,
+      "currentWeather": "15°C, Rain"
+    },
+    {
+      "destination": "Avignon",
+      "startDate": "",
+      "endDate": "",
+      "budgetLimit": 0,
+      "userCurrency": "EUR",
+      "localCurrency": "EUR",
+      "imageUrl": "https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=800",
+      "isFavorite": false,
+      "status": "planned",
+      "currentWeather": "19°C, Clear",
+      "id": "rHav61u"
+    },
+    {
+      "destination": "digne les bains",
+      "startDate": "",
+      "endDate": "",
+      "budgetLimit": 0,
+      "userCurrency": "EUR",
+      "localCurrency": "EUR",
+      "imageUrl": "https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=800",
+      "isFavorite": false,
+      "status": "planned",
+      "currentWeather": "No data",
+      "id": "l15T-mX"
+    },
+    {
+      "destination": "lille",
+      "startDate": "",
+      "endDate": "",
+      "budgetLimit": 0,
+      "userCurrency": "EUR",
+      "localCurrency": "EUR",
+      "imageUrl": "https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=800",
+      "isFavorite": false,
+      "status": "planned",
+      "currentWeather": "14°C, Clouds",
+      "id": "sPwm2rC"
+    },
+    {
+      "destination": "Rennes",
+      "startDate": "",
+      "endDate": "",
+      "budgetLimit": 0,
+      "userCurrency": "EUR",
+      "localCurrency": "EUR",
+      "imageUrl": "https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=800",
+      "isFavorite": false,
+      "status": "planned",
+      "currentWeather": "11°C, Rain",
+      "id": "cjvKvVQ"
     }
   ],
   "activities": [

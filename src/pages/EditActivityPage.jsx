@@ -4,8 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 function EditActivityPage() {
   const navigate = useNavigate();
-  const { activityId } = useParams(); // ✅ activityId (pas projectId)
-
+  const { activityId } = useParams(); 
   const API_URL = import.meta.env.VITE_SERVER_URL;
 
   const [title, setTitle] = useState("");
@@ -16,46 +15,51 @@ function EditActivityPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/activities/${activityId}`);
+        const activity = response.data;
+
+        setTitle(activity.title);
+        setTime(activity.time || "");
+        setCategory(activity.category || "");
+        setPriceLocal(activity.priceLocal || "");
+        setTripId(activity.tripId);
+      } catch (error) {
+        console.error("Error fetching activity:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     getData();
-  }, []);
-
-  const getData = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/activities/${activityId}`); // ✅ /activities
-      const activity = response.data;
-
-      setTitle(activity.title);
-      setTime(activity.time || "");
-      setCategory(activity.category || "");
-      setPriceLocal(activity.priceLocal || "");
-      setTripId(activity.tripId);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [activityId, API_URL]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const body = { title, time, category, priceLocal, tripId };
+    const body = { 
+      title, 
+      time, 
+      category, 
+      priceLocal: Number(priceLocal), 
+      tripId 
+    };
 
     try {
-      await axios.put(`${API_URL}/activities/${activityId}`, body); // ✅ /activities
-      navigate(`/trips/${tripId}`); // ✅ retour vers le bon trip
+      await axios.put(`${API_URL}/activities/${activityId}`, body);
+      navigate(`/trips/${tripId}`); 
     } catch (error) {
-      console.log(error);
+      console.error("Error updating activity:", error);
     }
   };
 
   const deleteActivity = async () => {
     if (!window.confirm("Supprimer cette activité ?")) return;
     try {
-      await axios.delete(`${API_URL}/activities/${activityId}`); // ✅ /activities
+      await axios.delete(`${API_URL}/activities/${activityId}`);
       navigate(`/trips/${tripId}`);
     } catch (error) {
-      console.log(error);
+      console.error("Error deleting activity:", error);
     }
   };
 
@@ -69,7 +73,7 @@ function EditActivityPage() {
 
   return (
     <div className="EditActivityPage py-4" style={{ maxWidth: "600px", margin: "0 auto" }}>
-      <h3 className="fw-bold mb-4">Modifier l'activité</h3>
+      <h3 className="fw-bold mb-4">Modify Activity</h3>
 
       <form onSubmit={handleFormSubmit}>
         <div className="mb-3">
@@ -145,4 +149,4 @@ function EditActivityPage() {
   );
 }
 
-export default EditActivityPage; // ✅ nom cohérent avec App.jsx
+export default EditActivityPage;
