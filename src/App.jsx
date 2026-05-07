@@ -12,7 +12,8 @@ import TripDetailsPage from './pages/TripDetailsPage';
 import EditActivityPage from './pages/EditActivityPage';
 import CreateTripPage from './pages/CreateTripPage';
 import EditTripPage from './pages/EditTripPage';
-import CreateActivityPage from './pages/CreateActivityPage'; // Import manquant
+import CreateActivityPage from './pages/CreateActivityPage';
+import TripTimelinePage from './pages/TripTimelinePage'; // <-- AJOUTÉ
 
 function App() {
   return (
@@ -26,11 +27,12 @@ function App() {
             <Route path="/trips/create" element={<CreateTripPage />} />
             <Route path="/trips/:tripId" element={<TripDetailsPage />} />
             <Route path="/trips/edit/:tripId" element={<EditTripPage />} />
+            <Route path="/trips/:id/timeline" element={<TripTimelinePage />} /> {/* <-- AJOUTÉ */}
 
             {/* ROUTES ACTIVITÉS */}
             <Route path="/activities/create" element={<CreateActivityPage />} />
             <Route path="/activities/edit/:activityId" element={<EditActivityPage />} />
-
+            
             <Route path="*" element={<div className="text-center mt-5"><h2>404</h2><p>Page not found</p></div>} />
           </Routes>
         </div>

@@ -33,19 +33,19 @@ function TripListPage() {
   return (
     <div className="TripListPage py-3">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h4 className="fw-bold mb-0">Mes voyages</h4>
-        <Link to="/trips/create" className="btn btn-dark btn-sm">+ Nouveau</Link>
+        <h4 className="fw-bold mb-0">My Trips</h4>
+        <Link to="/trips/create" className="btn btn-dark btn-sm">+ New</Link>
       </div>
 
       <input 
         type="text" 
-        className="form-control form-control-sm mb-4 shadow-sm" 
-        placeholder="🔍 Chercher..." 
+        className="form-control form-control-sm mb-5 shadow-sm" 
+        placeholder="🔍 Search..." 
         value={searchQuery} 
         onChange={(e) => setSearchQuery(e.target.value)} 
       />
 
-      <div className="row gx-2"> {/* gx-2 réduit l'espace entre les cartes */}
+      <div className="row gx-5 gy-4">  
         {filteredTrips.map((trip) => (
           <TripCard key={trip.id} trip={trip} onDelete={handleDelete} />
         ))}

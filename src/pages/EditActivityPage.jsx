@@ -54,7 +54,7 @@ function EditActivityPage() {
   };
 
   const deleteActivity = async () => {
-    if (!window.confirm("Supprimer cette activité ?")) return;
+    if (!window.confirm("Delete this activity?")) return;
     try {
       await axios.delete(`${API_URL}/activities/${activityId}`);
       navigate(`/trips/${tripId}`);
@@ -77,7 +77,7 @@ function EditActivityPage() {
 
       <form onSubmit={handleFormSubmit}>
         <div className="mb-3">
-          <label className="form-label fw-semibold">Titre</label>
+          <label className="form-label fw-semibold">Title</label>
           <input
             type="text"
             className="form-control"
@@ -88,7 +88,7 @@ function EditActivityPage() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label fw-semibold">Heure</label>
+          <label className="form-label fw-semibold">Time</label>
           <input
             type="time"
             className="form-control"
@@ -98,23 +98,23 @@ function EditActivityPage() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label fw-semibold">Catégorie</label>
+          <label className="form-label fw-semibold">Catégory</label>
           <select
             className="form-select"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="">-- Choisir --</option>
-            <option value="food">🍽️ Restauration</option>
+            <option value="">-- Select --</option>
+            <option value="food">🍽️ Catering</option>
             <option value="transport">🚗 Transport</option>
-            <option value="activity">🎯 Activité</option>
-            <option value="accommodation">🏨 Hébergement</option>
-            <option value="other">📌 Autre</option>
+            <option value="activity">🎯 Activity</option>
+            <option value="accommodation">🏨 Housing</option>
+            <option value="other">📌 Other</option>
           </select>
         </div>
 
         <div className="mb-4">
-          <label className="form-label fw-semibold">Prix (devise locale)</label>
+          <label className="form-label fw-semibold">Price (devise locale)</label>
           <input
             type="number"
             className="form-control"
@@ -126,14 +126,14 @@ function EditActivityPage() {
 
         <div className="d-flex gap-2">
           <button type="submit" className="btn btn-dark flex-grow-1">
-            Enregistrer
+            Save
           </button>
           <button
             type="button"
             className="btn btn-outline-danger"
             onClick={deleteActivity}
           >
-            Supprimer
+            Delete
           </button>
         </div>
       </form>
@@ -141,7 +141,7 @@ function EditActivityPage() {
       {tripId && (
         <div className="mt-3">
           <Link to={`/trips/${tripId}`} className="text-muted text-decoration-none small">
-            ← Retour au voyage
+            ← Return
           </Link>
         </div>
       )}

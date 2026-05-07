@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Ajout de useEffect
 import axios from "axios";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 
@@ -12,10 +12,38 @@ function CreateActivityPage() {
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("activity");
   const [priceLocal, setPriceLocal] = useState("");
+  
+  // Nouveaux états pour gérer les jours du voyage
+  const [dayNumber, setDayNumber] = useState("");
+  const [availableDays, setAvailableDays] = useState([]);
+
+  // Récupération des dates du voyage au chargement
+  useEffect(() => {
+    const fetchTripDates = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/trips/${tripId}`);
+        const start = new Date(res.data.startDate);
+        const end = new Date(res.data.endDate);
+        const diffDays = Math.ceil(Math.abs(end - start) / (1000 * 60 * 60 * 24)) + 1;
+
+        const days = Array.from({ length: diffDays }, (_, i) => {
+          const date = new Date(start);
+          date.setDate(start.getDate() + i);
+          return {
+            num: i + 1,
+            label: date.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric' })
+          };
+        });
+        setAvailableDays(days);
+      } catch (err) {
+        console.error("Erreur dates:", err);
+      }
+    };
+    if (tripId) fetchTripDates();
+  }, [tripId, API_URL]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Sécurité: on s'assure que tripId existe (Ligne 19)
     if (!tripId) {
         alert("Error: No Trip ID found");
         return;
@@ -26,6 +54,7 @@ function CreateActivityPage() {
         title, 
         time, 
         category, 
+        dayNumber: Number(dayNumber), // On ajoute le jour sélectionné
         priceLocal: Number(priceLocal) || 0, 
         isCompleted: false 
     };
@@ -46,6 +75,29 @@ function CreateActivityPage() {
         <div className="mb-3">
           <label className="form-label fw-bold">Title</label>
           <input type="text" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="E.g. Eiffel Tower" required />
+        </div>
+
+        {/* AJOUT DU SÉLECTEUR DE JOURS (Modèle Waouh) */}
+        <div className="mb-3">
+          <label className="form-label fw-bold d-block">When?</label>
+          <div className="d-flex flex-wrap gap-2">
+            {availableDays.map((day) => (
+              <div key={day.num}>
+                <input
+                  type="radio"
+                  className="btn-check"
+                  name="daySelect"
+                  id={`day-${day.num}`}
+                  onChange={() => setDayNumber(day.num)}
+                  required
+                />
+                <label className="btn btn-outline-dark btn-sm p-2" htmlFor={`day-${day.num}`} style={{ borderRadius: "10px", minWidth: "70px" }}>
+                  <small className="d-block fw-bold">Day {day.num}</small>
+                  <span style={{ fontSize: "0.7rem" }}>{day.label}</span>
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="row mb-3">

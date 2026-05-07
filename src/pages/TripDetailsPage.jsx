@@ -18,8 +18,6 @@ function TripDetailsPage() {
           axios.get(`${API_URL}/activities?tripId=${tripId}`)
         ]);
         setTrip(tripRes.data);
-        
-        // Tri par heure
         const sortedActivities = activitiesRes.data.sort((a, b) => (a.time || "").localeCompare(b.time || ""));
         setActivities(sortedActivities);
       } catch (err) {
@@ -31,7 +29,6 @@ function TripDetailsPage() {
     fetchData();
   }, [tripId, API_URL]);
 
-  // --- CALCUL DU COÛT TOTAL (Nouveau) ---
   const totalCost = activities.reduce((acc, curr) => acc + (Number(curr.priceLocal) || 0), 0);
   const isOverBudget = trip ? totalCost > trip.budgetLimit : false;
 
@@ -53,17 +50,16 @@ function TripDetailsPage() {
             src={trip.imageUrl} 
             className="img-fluid rounded shadow" 
             alt="dest" 
-            style={{ maxHeight: "250px", width: "100%", objectFit: "cover" }}
+            style={{ maxHeight: "200px", width: "100%", objectFit: "cover", borderRadius: "20px", border: "4px solid white",}}
           />
         </div>
         <div className="col-md-8">
           <h1 className="fw-bold">{trip.destination}</h1>
           <p className="text-muted mb-1">{trip.startDate} to {trip.endDate}</p>
           <p className="badge bg-info text-dark">
-   ☀️ Météo prévue : {trip.weather || "Non disponible"}
-</p>
+            ☀️ Météo prévue : {trip.weather || "Non disponible"}
+          </p>
           
-          {/* SECTION BUDGET RÉCAPITULATIVE */}
           <div className={`p-3 rounded mb-3 ${isOverBudget ? "bg-danger-subtle border border-danger" : "bg-light border"}`}>
             <div className="d-flex justify-content-between align-items-center">
               <div>
@@ -95,7 +91,11 @@ function TripDetailsPage() {
 
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h3 className="fw-bold m-0">Daily Schedule</h3>
-        <Link to={`/activities/create?tripId=${trip.id}`} className="btn btn-dark">+ Add Activity</Link>
+        <div className="d-flex gap-2">
+          {/* BOUTON TIMELINE AJOUTÉ ICI */}
+          <Link to={`/trips/${trip.id}/timeline`} className="btn btn-outline-dark">🗓️ View Timeline</Link>
+          <Link to={`/activities/create?tripId=${trip.id}`} className="btn btn-dark">+ Add Activity</Link>
+        </div>
       </div>
 
       <div className="activities-list">

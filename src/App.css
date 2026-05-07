@@ -9,7 +9,7 @@ body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: #f8f9fa;
-  color: #212529;
+  color: #2f3133;
  
   overflow-x: hidden; 
 }
@@ -25,6 +25,7 @@ h3 { font-size: 1.3rem; }
   padding-top: 60px;
   padding-left: 60px;
   padding-right: 60px;
+  
  }
 
   
@@ -66,7 +67,7 @@ h3 { font-size: 1.3rem; }
   width: 100%;
 }
 
-/* On rend les boutons plus grands pour faciliter le clic tactile */
+ 
 .btn {
   padding: 10px 15px;
   font-weight: 600;
