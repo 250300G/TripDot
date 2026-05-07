@@ -37,15 +37,30 @@ function TripDetailsPage() {
     </div>
   );
 
+  // Budget calculé depuis les activités
+  const totalSpent = activities.reduce((sum, act) => sum + (Number(act.priceLocal) || 0), 0);
+  const budget = Number(trip.budgetLimit) || 0;
+  const budgetPercent = budget > 0 ? Math.min((totalSpent / budget) * 100, 100) : 0;
+  const overBudget = totalSpent > budget && budget > 0;
+
   return (
     <div className="container py-4">
+
+      {/* Breadcrumb */}
+      <nav className="mb-3" aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item"><Link to="/trips" className="text-decoration-none text-muted">My trips</Link></li>
+          <li className="breadcrumb-item active">{trip.destination}</li>
+        </ol>
+      </nav>
+
       <div className="row mb-4">
         <div className="col-md-6">
-          <img 
-            src={trip.imageUrl || "https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=800"} 
-            alt={trip.destination} 
-            className="img-fluid rounded shadow-sm mb-3" 
-            style={{ width: "100%", height: "300px", objectFit: "cover" }} 
+          <img
+            src={trip.imageUrl || "https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=800"}
+            alt={trip.destination}
+            className="img-fluid rounded shadow-sm mb-3"
+            style={{ width: "100%", height: "300px", objectFit: "cover" }}
           />
         </div>
         <div className="col-md-6">
@@ -57,10 +72,29 @@ function TripDetailsPage() {
           </div>
           <p className="text-muted fs-5 mb-1">{trip.startDate} — {trip.endDate}</p>
           <p className="text-primary fw-bold mb-3">🌤️ Weather: {trip.currentWeather || "N/A"}</p>
-          
+
+          {/* Budget card avec total activités */}
           <div className="p-3 bg-white border rounded">
-            <p className="mb-0 text-secondary">Budget Limite</p>
-            <h4 className="fw-bold">{trip.budgetLimit} {trip.userCurrency}</h4>
+            <div className="d-flex justify-content-between mb-1">
+              <p className="mb-0 text-secondary">Budget spent</p>
+              <span className={`fw-bold ${overBudget ? "text-danger" : "text-success"}`}>
+                {totalSpent} / {trip.budgetLimit} {trip.userCurrency}
+              </span>
+            </div>
+            <div className="progress mb-1" style={{ height: "8px", borderRadius: "4px" }}>
+              <div
+                className="progress-bar"
+                style={{
+                  width: `${budgetPercent}%`,
+                  backgroundColor: overBudget ? "#dc3545" : budgetPercent > 75 ? "#ffc107" : "#198754",
+                  transition: "width 0.8s ease"
+                }}
+              />
+            </div>
+            {overBudget
+              ? <small className="text-danger fw-semibold">⚠️ Over budget by {totalSpent - budget} {trip.userCurrency}</small>
+              : <small className="text-muted">Remaining: {budget - totalSpent} {trip.userCurrency}</small>
+            }
           </div>
         </div>
       </div>
@@ -69,7 +103,6 @@ function TripDetailsPage() {
 
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h3 className="fw-bold">Activities</h3>
-        
         <Link to={`/activities/create?tripId=${trip.id}`} className="btn btn-outline-dark btn-sm">+ Add</Link>
       </div>
 

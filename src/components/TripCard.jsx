@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function TripCard({ trip }) {
+function TripCard({ trip}) {
   // Logique pour déterminer la couleur du badge selon le statut
   const getStatusBadge = (status) => {
     switch (status) {
@@ -14,6 +14,7 @@ function TripCard({ trip }) {
   };
 
   return (
+    
     <div className="col-md-4 mb-4">
       <div className="card h-100 shadow-sm border-0 transition-hover">
         {/* Image du voyage avec overlay pour le statut */}

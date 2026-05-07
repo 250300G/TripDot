@@ -4,23 +4,34 @@ import axios from "axios";
 import TripCard from "../components/TripCard"; 
 
 function TripListPage() {
-  // On initialise à null pour savoir si le premier chargement est en cours
   const [allTrips, setAllTrips] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // --- AJOUT DE LA FONCTION DE SUPPRESSION ICI ---
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this trip?")) return;
+
+    try {
+      await axios.delete(`${import.meta.env.VITE_SERVER_URL}/trips/${id}`);
+      // On met à jour l'interface immédiatement en filtrant le voyage supprimé
+      setAllTrips(allTrips.filter(trip => trip.id !== id));
+    } catch (error) {
+      console.error("Error deleting trip:", error);
+      alert("Failed to delete the trip.");
+    }
+  };
+  // ----------------------------------------------
+
   const getData = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/trips`);
-      // Sécurité : on s'assure de recevoir un tableau pour ne pas casser le .filter() plus bas
       const data = Array.isArray(response.data) ? response.data : [];
       setAllTrips(data);
     } catch (error) {
-      console.error("Erreur lors de la récupération des données :", error);
-      // En cas d'erreur, on met un tableau vide pour éviter le chargement infini
+      console.error(error);
       setAllTrips([]);
     } finally {
-      // Quoi qu'il arrive, on arrête le spinner
       setLoading(false);
     }
   };
@@ -29,26 +40,32 @@ function TripListPage() {
     getData();
   }, []);
 
-  // 🔍 Filtrage par destination (sécurisé avec filteredTrips initialisé à [])
   const filteredTrips = allTrips
-    ? allTrips.filter((trip) =>
-        trip.destination?.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+    ? allTrips
+        .slice()
+        .sort((a, b) => {
+          if (!a.startDate && b.startDate) return 1;
+          if (a.startDate && !b.startDate) return -1;
+          if (a.status === "done" && b.status !== "done") return 1;
+          if (a.status !== "done" && b.status === "done") return -1;
+          return new Date(a.startDate) - new Date(b.startDate);
+        })
+        .filter((trip) =>
+          trip.destination?.toLowerCase().includes(searchQuery.toLowerCase())
+        )
     : [];
 
-  // Affichage du spinner pendant le chargement
   if (loading) {
     return (
       <div className="text-center mt-5">
         <div className="spinner-border text-dark" role="status" />
-        <p className="mt-3 text-muted">Loading your journeys...</p>
+        <p className="mt-3 text-muted">Loading...</p>
       </div>
     );
   }
 
   return (
     <div className="TripListPage py-4">
-      {/* HEADER */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="fw-bold mb-0">My trips</h2>
         <Link to="/trips/create" className="btn btn-dark btn-sm px-3">
@@ -56,7 +73,6 @@ function TripListPage() {
         </Link>
       </div>
 
-      {/* SEARCH BAR */}
       <div className="mb-4">
         <input
           type="text"
@@ -67,7 +83,6 @@ function TripListPage() {
         />
       </div>
 
-      {/* EMPTY STATE ou LISTE */}
       {filteredTrips.length === 0 ? (
         <div className="text-center py-5">
           <p className="text-muted fs-5">No trip found.</p>
@@ -78,7 +93,8 @@ function TripListPage() {
       ) : (
         <div className="row">
           {filteredTrips.map((trip) => (
-            <TripCard key={trip.id} trip={trip} /> 
+            // --- ON PASSE LA FONCTION HANDLEDELETE ICI ---
+            <TripCard key={trip.id} trip={trip} onDelete={handleDelete} />
           ))}
         </div>
       )}

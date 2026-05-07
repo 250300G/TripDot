@@ -34,10 +34,10 @@ function HomePage() {
         </Link>
       </div>
 
-      {/* VOYAGES RÉCENTS */}
+ 
       {recentTrips.length > 0 && (
         <>
-          <h4 className="fw-bold mb-3">Last Trip</h4>
+          <h4 className="fw-bold mb-3">Overview</h4>
           <div className="list-group mb-4">
             {recentTrips.map((trip) => (
               <Link
