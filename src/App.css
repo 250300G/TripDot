@@ -1,4 +1,4 @@
-/* --- RESET & MOBILE FIRST DEFAULTS --- */
+ 
 #root {
   width: 100%;
   margin: 0 auto;
@@ -10,7 +10,7 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: #f8f9fa;
   color: #212529;
-  /* Empêche le zoom horizontal involontaire sur mobile */
+ 
   overflow-x: hidden; 
 }
 
@@ -20,10 +20,14 @@ h2 { font-size: 1.5rem; }
 h3 { font-size: 1.3rem; }
 
 /* --- CONTENEURS --- */
+ 
 .container {
-  padding-left: 15px;
-  padding-right: 15px;
-}
+  padding-top: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
+ }
+
+  
 
 /* --- PLANNING & ACTIVITÉS (Optimisé Mobile) --- */
 .activities-list {
@@ -58,7 +62,7 @@ h3 { font-size: 1.3rem; }
 .form-container {
   background: white;
   padding: 20px;
-  border-radius: 0; /* Pleine largeur sur mobile pour gagner de la place */
+  border-radius: 0;  
   width: 100%;
 }
 
