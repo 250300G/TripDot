@@ -13,7 +13,7 @@ import EditActivityPage from './pages/EditActivityPage';
 import CreateTripPage from './pages/CreateTripPage';
 import EditTripPage from './pages/EditTripPage';
 import CreateActivityPage from './pages/CreateActivityPage';
-import TripTimelinePage from './pages/TripTimelinePage'; // <-- AJOUTÉ
+import TripTimelinePage from './pages/TripTimelinePage';  
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
             <Route path="/trips/create" element={<CreateTripPage />} />
             <Route path="/trips/:tripId" element={<TripDetailsPage />} />
             <Route path="/trips/edit/:tripId" element={<EditTripPage />} />
-            <Route path="/trips/:id/timeline" element={<TripTimelinePage />} /> {/* <-- AJOUTÉ */}
+            <Route path="/trips/:id/timeline" element={<TripTimelinePage />} /> 
 
             {/* ROUTES ACTIVITÉS */}
             <Route path="/activities/create" element={<CreateActivityPage />} />

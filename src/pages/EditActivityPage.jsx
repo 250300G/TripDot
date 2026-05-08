@@ -4,7 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 function EditActivityPage() {
   const navigate = useNavigate();
-  const { activityId } = useParams(); 
+  const { activityId } = useParams();
   const API_URL = import.meta.env.VITE_SERVER_URL;
 
   const [title, setTitle] = useState("");
@@ -37,17 +37,17 @@ function EditActivityPage() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const body = { 
-      title, 
-      time, 
-      category, 
-      priceLocal: Number(priceLocal), 
-      tripId 
+    const body = {
+      title,
+      time,
+      category,
+      priceLocal: Number(priceLocal),
+      tripId,
     };
 
     try {
       await axios.put(`${API_URL}/activities/${activityId}`, body);
-      navigate(`/trips/${tripId}`); 
+      navigate(`/trips/${tripId}`);
     } catch (error) {
       console.error("Error updating activity:", error);
     }
@@ -72,7 +72,10 @@ function EditActivityPage() {
   }
 
   return (
-    <div className="EditActivityPage py-4" style={{ maxWidth: "600px", margin: "0 auto" }}>
+    <div
+      className="EditActivityPage py-4"
+      style={{ maxWidth: "600px", margin: "0 auto" }}
+    >
       <h3 className="fw-bold mb-4">Modify Activity</h3>
 
       <form onSubmit={handleFormSubmit}>
@@ -114,7 +117,9 @@ function EditActivityPage() {
         </div>
 
         <div className="mb-4">
-          <label className="form-label fw-semibold">Price (devise locale)</label>
+          <label className="form-label fw-semibold">
+            Price (devise locale)
+          </label>
           <input
             type="number"
             className="form-control"
@@ -140,7 +145,10 @@ function EditActivityPage() {
 
       {tripId && (
         <div className="mt-3">
-          <Link to={`/trips/${tripId}`} className="text-muted text-decoration-none small">
+          <Link
+            to={`/trips/${tripId}`}
+            className="text-muted text-decoration-none small"
+          >
             ← Return
           </Link>
         </div>

@@ -12,7 +12,7 @@ function CreateActivityPage() {
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("activity");
   const [priceLocal, setPriceLocal] = useState("");
-  
+
   // Nouveaux états pour gérer les jours du voyage
   const [dayNumber, setDayNumber] = useState("");
   const [availableDays, setAvailableDays] = useState([]);
@@ -24,14 +24,18 @@ function CreateActivityPage() {
         const res = await axios.get(`${API_URL}/trips/${tripId}`);
         const start = new Date(res.data.startDate);
         const end = new Date(res.data.endDate);
-        const diffDays = Math.ceil(Math.abs(end - start) / (1000 * 60 * 60 * 24)) + 1;
+        const diffDays =
+          Math.ceil(Math.abs(end - start) / (1000 * 60 * 60 * 24)) + 1;
 
         const days = Array.from({ length: diffDays }, (_, i) => {
           const date = new Date(start);
           date.setDate(start.getDate() + i);
           return {
             num: i + 1,
-            label: date.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric' })
+            label: date.toLocaleDateString("fr-FR", {
+              weekday: "short",
+              day: "numeric",
+            }),
           };
         });
         setAvailableDays(days);
@@ -45,18 +49,18 @@ function CreateActivityPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!tripId) {
-        alert("Error: No Trip ID found");
-        return;
+      alert("Error: No Trip ID found");
+      return;
     }
 
-    const newActivity = { 
-        tripId: tripId,
-        title, 
-        time, 
-        category, 
-        dayNumber: Number(dayNumber), // On ajoute le jour sélectionné
-        priceLocal: Number(priceLocal) || 0, 
-        isCompleted: false 
+    const newActivity = {
+      tripId: tripId,
+      title,
+      time,
+      category,
+      dayNumber: Number(dayNumber), // On ajoute le jour sélectionné
+      priceLocal: Number(priceLocal) || 0,
+      isCompleted: false,
     };
 
     try {
@@ -70,14 +74,24 @@ function CreateActivityPage() {
   return (
     <div className="container py-5 text-start" style={{ maxWidth: "500px" }}>
       <h3 className="fw-bold mb-4 text-center">New Activity</h3>
-      
-      <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow-sm border">
+
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-4 rounded shadow-sm border"
+      >
         <div className="mb-3">
           <label className="form-label fw-bold">Title</label>
-          <input type="text" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="E.g. Eiffel Tower" required />
+          <input
+            type="text"
+            className="form-control"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="E.g. Eiffel Tower"
+            required
+          />
         </div>
 
-        {/* AJOUT DU SÉLECTEUR DE JOURS (Modèle Waouh) */}
+   
         <div className="mb-3">
           <label className="form-label fw-bold d-block">When?</label>
           <div className="d-flex flex-wrap gap-2">
@@ -91,7 +105,11 @@ function CreateActivityPage() {
                   onChange={() => setDayNumber(day.num)}
                   required
                 />
-                <label className="btn btn-outline-dark btn-sm p-2" htmlFor={`day-${day.num}`} style={{ borderRadius: "10px", minWidth: "70px" }}>
+                <label
+                  className="btn btn-outline-dark btn-sm p-2"
+                  htmlFor={`day-${day.num}`}
+                  style={{ borderRadius: "10px", minWidth: "70px" }}
+                >
                   <small className="d-block fw-bold">Day {day.num}</small>
                   <span style={{ fontSize: "0.7rem" }}>{day.label}</span>
                 </label>
@@ -103,11 +121,21 @@ function CreateActivityPage() {
         <div className="row mb-3">
           <div className="col">
             <label className="form-label fw-bold">Time</label>
-            <input type="time" className="form-control" value={time} onChange={(e) => setTime(e.target.value)} required />
+            <input
+              type="time"
+              className="form-control"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
+            />
           </div>
           <div className="col">
             <label className="form-label fw-bold">Category</label>
-            <select className="form-select" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <select
+              className="form-select"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
               <option value="activity">🎯 Activity</option>
               <option value="food">🍽️ Food</option>
               <option value="transport">🚗 Transport</option>
@@ -118,11 +146,23 @@ function CreateActivityPage() {
 
         <div className="mb-4">
           <label className="form-label fw-bold">Local Price</label>
-          <input type="number" className="form-control" value={priceLocal} onChange={(e) => setPriceLocal(e.target.value)} />
+          <input
+            type="number"
+            className="form-control"
+            value={priceLocal}
+            onChange={(e) => setPriceLocal(e.target.value)}
+          />
         </div>
 
-        <button type="submit" className="btn btn-dark w-100 mb-2">Save Activity</button>
-        <Link to={`/trips/${tripId}`} className="btn btn-outline-secondary w-100">Cancel</Link>
+        <button type="submit" className="btn btn-dark w-100 mb-2">
+          Save Activity
+        </button>
+        <Link
+          to={`/trips/${tripId}`}
+          className="btn btn-outline-secondary w-100"
+        >
+          Cancel
+        </Link>
       </form>
     </div>
   );

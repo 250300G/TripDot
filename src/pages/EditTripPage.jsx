@@ -15,8 +15,9 @@ function EditTripPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // On charge les données actuelles pour pré-remplir le formulaire
-    axios.get(`${API_URL}/trips/${tripId}`)
+   
+    axios
+      .get(`${API_URL}/trips/${tripId}`)
       .then((res) => {
         const trip = res.data;
         setDestination(trip.destination);
@@ -36,11 +37,11 @@ function EditTripPage() {
       startDate,
       endDate,
       budgetLimit: Number(budgetLimit),
-      status
+      status,
     };
 
     try {
-      // PATCH permet de ne pas écraser l'image (imageUrl)
+    
       await axios.patch(`${API_URL}/trips/${tripId}`, updatedTrip);
       navigate(`/trips/${tripId}`); // Retour à la page Details
     } catch (error) {
@@ -53,47 +54,79 @@ function EditTripPage() {
   return (
     <div className="container py-4">
       <div className="mb-3 text-start">
-        <Link to={`/trips/${tripId}`} className="btn btn-link text-dark p-0">← Cancel</Link>
+        <Link to={`/trips/${tripId}`} className="btn btn-link text-dark p-0">
+          ← Cancel
+        </Link>
       </div>
 
       <div className="form-container mx-auto" style={{ maxWidth: "500px" }}>
         <h2 className="fw-bold mb-4">Edit Trip Settings</h2>
-        
 
-
-        <Link to={`/trips/${tripId}`} className="btn btn-outline-secondary w-100 mt-2">Cancel</Link>
+        <Link
+          to={`/trips/${tripId}`}
+          className="btn btn-outline-secondary w-100 mt-2"
+        >
+          Cancel
+        </Link>
         <form onSubmit={handleSubmit} className="text-start">
           <div className="mb-3">
             <label className="form-label">Destination</label>
-            <input type="text" className="form-control" value={destination} onChange={(e) => setDestination(e.target.value)} required />
+            <input
+              type="text"
+              className="form-control"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              required
+            />
           </div>
 
           <div className="row mb-3">
             <div className="col">
               <label className="form-label">Start Date</label>
-              <input type="date" className="form-control" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input
+                type="date"
+                className="form-control"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
             </div>
             <div className="col">
               <label className="form-label">End Date</label>
-              <input type="date" className="form-control" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input
+                type="date"
+                className="form-control"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
             </div>
           </div>
 
           <div className="mb-3">
             <label className="form-label">Budget Limit</label>
-            <input type="number" className="form-control" value={budgetLimit} onChange={(e) => setBudgetLimit(e.target.value)} />
+            <input
+              type="number"
+              className="form-control"
+              value={budgetLimit}
+              onChange={(e) => setBudgetLimit(e.target.value)}
+            />
           </div>
 
           <div className="mb-4">
             <label className="form-label">Status</label>
-            <select className="form-select" value={status} onChange={(e) => setStatus(e.target.value)}>
+            <select
+              className="form-select"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
               <option value="planned">Coming</option>
               <option value="ongoing">Current</option>
               <option value="done">Past</option>
             </select>
           </div>
 
-          <button type="submit" className="btn btn-dark w-100 py-2">Save Changes</button>
+          <button type="submit" className="btn btn-dark w-100 py-2">
+            Save Changes
+          </button>
         </form>
       </div>
     </div>

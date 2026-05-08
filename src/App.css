@@ -9,7 +9,7 @@ body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: #f8f9fa;
-  color: #2f3133;
+  color: #3f4244;
  
   overflow-x: hidden; 
 }
@@ -42,7 +42,7 @@ h3 { font-size: 1.3rem; }
   border-radius: 10px;
   padding: 12px;
   display: flex;
-  flex-direction: row; /* Garde l'heure et le titre alignés */
+  flex-direction: row;  
   align-items: center;
   justify-content: space-between;
   border-left: 4px solid #212529;
@@ -82,7 +82,7 @@ h3 { font-size: 1.3rem; }
   
   .form-container {
     padding: 40px;
-    border-radius: 15px; /* On remet les arrondis sur desktop */
+    border-radius: 15px; 
     margin-top: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   }
