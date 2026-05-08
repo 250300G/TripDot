@@ -1,7 +1,16 @@
+# Dependencies
+node_modules
+
+# Build
+dist
+dist-ssr
+
+# Env files
 .env
 .env.local
 
-
+# Backend (ignored in frontend repo)
+server/
 
 # Logs
 logs
@@ -12,13 +21,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-# *.local # commenting it for learning purposes.
-
-# Editor directories and files
-.vscode/*
+# Editor / OS
+.vscode/
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -27,6 +31,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-
-
